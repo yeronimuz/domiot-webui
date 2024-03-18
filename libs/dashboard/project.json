@@ -1,0 +1,9 @@
+{
+  "name": "dashboard",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/dashboard/src",
+  "prefix": "domiot",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

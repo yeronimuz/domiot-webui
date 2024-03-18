@@ -14,7 +14,22 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@domiot/app-config": ["libs/app-config/index.ts"],
+      "@domiot/authentication": ["libs/authentication/src/index.ts"],
+      "@domiot/dashboard": ["libs/dashboard/src/index.ts"],
+      "@domiot/data-access/authorization": [
+        "libs/data-access/authorization/src/index.ts"
+      ],
+      "@domiot/data-access/domiot-api": [
+        "libs/data-access/domiot-api/src/index.ts"
+      ],
+      "@domiot/devices": ["libs/devices/src/index.ts"],
+      "@domiot/menu": ["libs/menu/src/index.ts"],
+      "@domiot/site": ["libs/site/src/index.ts"],
+      "@domiot/system": ["libs/system/src/index.ts"],
+      "@domiot/ui/eventqueue": ["libs/ui/eventqueue/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

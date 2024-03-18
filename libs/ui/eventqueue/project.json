@@ -1,0 +1,9 @@
+{
+  "name": "ui-eventqueue",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/eventqueue/src",
+  "prefix": "domiot",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

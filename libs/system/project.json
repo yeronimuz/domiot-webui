@@ -1,0 +1,9 @@
+{
+  "name": "system",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/system/src",
+  "prefix": "domiot",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

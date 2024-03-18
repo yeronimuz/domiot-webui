@@ -1,0 +1,9 @@
+{
+  "name": "data-access-authorization",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/authorization/src",
+  "prefix": "domiot",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

@@ -1,0 +1,42 @@
+<div
+  class="flex-row fixed top-0 z-10 flex w-full justify-center bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap  lg:py-4"
+  *ngIf="showMenu">
+  <div class="flex justify-between">
+    <button mat-button [routerLink]="['/dashboard']" routerLinkActive="activebutton">Dashboard</button>
+    <button mat-button [routerLink]="['/']" routerLinkActive="activebutton">Home</button>
+
+    <button mat-button [routerLink]="['/residents']" routerLinkActive="activebutton">Bewoners</button>
+
+    <button mat-button [matMenuTriggerFor]="usersMenu" routerLinkActive="activebutton">Gebruikers</button>
+    <mat-menu #usersMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/users']">Gebruikers</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="organizationMenu" routerLinkActive="activebutton">Huis</button>
+    <mat-menu #organizationMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/site']">Huis</button>
+      <button mat-menu-item [routerLink]="['/site/floors']">Verdiepingen</button>
+      <button mat-menu-item [routerLink]="['/site/rooms']">Kamers</button>
+      <button mat-menu-item [routerLink]="['/site/areas']">Gebieden</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="devicesMenu" routerLinkActive="activebutton">Apparatuur</button>
+    <mat-menu #devicesMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/devices']">Apparatuur</button>
+      <button mat-menu-item [routerLink]="['/devices/sensors']">Sensoren</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="systemMenu" routerLinkActive="activebutton">Systeem</button>
+    <mat-menu #systemMenu="matMenu">
+      <button mat-menu-item [routerLink]="['/system']">Systeem instellingen</button>
+      <button mat-menu-item [routerLink]="['/system/notifications']">Notificaties</button>
+    </mat-menu>
+
+    <button mat-button (click)="logout()" [disabled]="!authenticated" [matMenuTriggerFor]="logoutMenu"
+            routerLinkActive="activebutton">Uitloggen
+    </button>
+    <mat-menu #logoutMenu="matMenu">
+    </mat-menu>
+  </div>
+</div>
+<router-outlet></router-outlet>
