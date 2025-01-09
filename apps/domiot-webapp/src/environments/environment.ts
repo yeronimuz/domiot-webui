@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  domiotApiUrl: 'http://192.168.2.75:8080',
-  // domiotApiUrl: 'http://localhost:8080',
+  // domiotApiUrl: 'http://192.168.2.2:7010/api',
+  domiotApiUrl: 'http://localhost:7010/api',
 };

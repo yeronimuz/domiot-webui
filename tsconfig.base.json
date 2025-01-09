@@ -21,12 +21,13 @@
       "@domiot/data-access/authorization": [
         "libs/data-access/authorization/src/index.ts"
       ],
-      "@domiot/domiot-api": [
-        "libs/data-access/domiot-api/src/index.ts"
-      ],
       "@domiot/devices": ["libs/devices/src/index.ts"],
+      "@domiot/domiot-api": ["libs/data-access/domiot-api/src/index.ts"],
       "@domiot/menu": ["libs/menu/src/index.ts"],
       "@domiot/sensor-api": ["libs/data-access/sensor-api/src/index.ts"],
+      "@domiot/sensor-graphdata-api": [
+        "libs/data-access/sensor-graphdata-api/src/index.ts"
+      ],
       "@domiot/sensor-values": ["libs/sensor-values/src/index.ts"],
       "@domiot/sensorvalue-api": [
         "libs/data-access/sensorvalue-api/src/index.ts"

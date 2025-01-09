@@ -1,0 +1,9 @@
+{
+  "name": "sensor-graphdata-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/sensor-graphdata-api/src",
+  "prefix": "domiot",
+  "tags": [],
+  "projectType": "library",
+  "targets": {}
+}

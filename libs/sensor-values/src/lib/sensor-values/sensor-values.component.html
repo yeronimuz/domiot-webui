@@ -10,9 +10,9 @@
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
   [timeline]="timeline"
-  [yScaleMin]="2830"
-  [yScaleMax]="2840"
-  [results]="sensorValues | sensorGraphData"
+  [yScaleMin]="yAxisMin!"
+  [yScaleMax]="yAxisMax!"
+  [results]="sensorValues"
   (select)="onSelect($event)"
   (activate)="onActivate($event)"
   (deactivate)="onDeactivate($event)">

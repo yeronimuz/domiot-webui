@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppSensorValueService, SensorValueModel } from '@domiot/sensorvalue-api';
-import { SensorValueListResponse } from '@domiot/data-access/domiot-api';
+import { AppSensorValueService } from '@domiot/sensorvalue-api';
+import { SensorValueGraphResponse, SensorValueListResponse } from '@domiot/domiot-api';
 import { Observable } from 'rxjs';
 import { LineChartModule } from '@swimlane/ngx-charts';
-import { SensorGraphDataPipe } from '../pipes/sensor-graph-data.pipe';
 import { SensorValuesModule } from '@domiot/sensor-values';
+import { AppSensorGraphDataService } from '@domiot/sensor-graphdata-api';
 
 @Component({
   selector: 'domiot-sensor-values',
@@ -15,7 +15,7 @@ import { SensorValuesModule } from '@domiot/sensor-values';
   styleUrl: './sensor-values.component.scss'
 })
 export class SensorValuesComponent implements OnInit {
-  sensorValues: SensorValueModel[] = [];
+  sensorValues: any[] = [];
   values: any[] = [];
   view: [number, number] = [700, 300];
 
@@ -27,15 +27,17 @@ export class SensorValuesComponent implements OnInit {
   yAxis = true;
   showYAxisLabel = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Year';
-  yAxisLabel = 'Population';
+  xAxisLabel = 'Time';
+  yAxisLabel = 'kWh';
   timeline = true;
+  yAxisMin: number | undefined = 0;
+  yAxisMax: number | undefined = 0;
 
   colorScheme = 'cool';
 
   constructor(
-    private appSensorValueService: AppSensorValueService,
-    private sensorGraphDataPipe: SensorGraphDataPipe) {
+    private readonly appSensorValueService: AppSensorValueService,
+    private readonly sensorGraphdataService: AppSensorGraphDataService) {
   }
 
 
@@ -51,26 +53,31 @@ export class SensorValuesComponent implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
-  getSensorValues(sensorId: number, dtStart: string, dtEnd: string, offset: number, limit: number): Observable<SensorValueListResponse> {
-    return this.appSensorValueService.getSensorValues(sensorId, dtStart, dtEnd, offset, limit);
+  getSensorValuesBySensorIds(sensorId: number, dtStart: string, dtEnd: string, samplingFactor: number): Observable<SensorValueListResponse> {
+    return this.appSensorValueService.getSensorValuesBySensorIds(new Array<number>(sensorId), dtStart, dtEnd, samplingFactor);
+  }
+
+  getGraphDataBySensorIds(sensorIds: Array<number>, dtStart: string, dtEnd: string, samplingFactor: number): Observable<SensorValueGraphResponse> {
+    return this.sensorGraphdataService.getSensorValueGraphData(sensorIds, dtStart, dtEnd, samplingFactor);
   }
 
   ngOnInit(): void {
-    this.getSensorValues(7, '2024-03-30T00:00:00', '2024-03-30T23:59:59', 0, 200)
+    // FIXME: single sensorId not working
+    this.getGraphDataBySensorIds(new Array<number>(7, 7), '2025-01-03T00:00:00', '2025-01-05T23:59:00', 1)
       .pipe()
       .subscribe({
-        next: (sensorValueListResponse: SensorValueListResponse) => {
-          this.sensorValues = sensorValueListResponse.result ? sensorValueListResponse.result : [];
-          console.log(sensorValueListResponse);
-          // this.values = this.mapResponseToGraphData(this.sensorValues);
+        next: (response: SensorValueGraphResponse) => {
+
+          if (response.metaData) {
+            const keys = Object.keys(response.metaData);
+            this.yAxisMin = response.metaData[`${keys[0]}`].min;
+            this.yAxisMax = response.metaData[`${keys[0]}`].max;
+          }
+          this.sensorValues = response.values!;
         },
         error: (error: Error) => {
           console.log(error);
         }
       });
-  }
-
-  private mapResponseToGraphData(sensorValues: SensorValueModel[]): any[] {
-    return this.sensorGraphDataPipe.transform(sensorValues);
   }
 }

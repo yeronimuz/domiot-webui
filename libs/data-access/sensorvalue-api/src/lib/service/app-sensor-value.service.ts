@@ -9,13 +9,12 @@ import { APP_CONFIG } from '@domiot/app-config';
 })
 export class AppSensorValueService {
 
-  constructor(@Inject(APP_CONFIG) private appConfig: any, private sensorvalueService: SensorValueService) {
-    // sensorvalueService.defaultHeaders = sensorvalueService.defaultHeaders.set('Accept', '*/*')
+  constructor(@Inject(APP_CONFIG) private readonly appConfig: any, private readonly sensorvalueService: SensorValueService) {
     console.log(appConfig)
     sensorvalueService.configuration.basePath = this.appConfig.domiotApiUrl;
   }
 
-  getSensorValues(sensorId: number, dtStart: string, dtEnd: string, offset: number, limit: number): Observable<SensorValueListResponse> {
-    return this.sensorvalueService.getSensorValues(sensorId, dtStart, dtEnd, offset, limit);
+  getSensorValuesBySensorIds(sensorIds: Array<number>, dtStart: string, dtEnd: string, samplingFactor: number): Observable<SensorValueListResponse> {
+    return this.sensorvalueService.getSensorValues(sensorIds, dtStart, dtEnd, samplingFactor);
   }
 }
